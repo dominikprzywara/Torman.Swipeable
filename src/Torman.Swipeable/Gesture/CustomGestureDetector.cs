@@ -2,10 +2,12 @@
 using Android.Views;
 using System;
 
-namespace Torman.Swipeable
+namespace Torman.Swipeable.Gesture
 {
     internal class CustomGestureDetector : GestureDetector.SimpleOnGestureListener, View.IOnTouchListener
     {
+        public event EventHandler<float> MovementChanged;
+
         private static int MaxClickDuration = 1000;
 
         private static int MaxClickDistance = 15;
@@ -27,14 +29,14 @@ namespace Torman.Swipeable
         public CustomGestureDetector(SwipeLayout swipeView, float offset)
         {
             parentView = swipeView;
-            LeftSwipe = true;
-            RightSwipe = true;
+            LeftSwipePossible = true;
+            RightSwipePossible = true;
             Offset = offset;
         }
 
-        public bool LeftSwipe { get; set; }
+        public bool LeftSwipePossible { get; private set; }
 
-        public bool RightSwipe { get; set; }
+        public bool RightSwipePossible { get; private set; }
 
         public float Offset { get; }
 
@@ -98,7 +100,30 @@ namespace Torman.Swipeable
                 SwipeWhenHaveButtons(e, movement);
             }
 
+            if (movement != 0)
+            {
+                OnMovementChanged(movement);
+            }
+
             return true;
+        }
+
+        public void SetOnlyLeftSwipe()
+        {
+            LeftSwipePossible = true;
+            RightSwipePossible = false;
+        }
+
+        public void SetOnlyRightSwipe()
+        {
+            LeftSwipePossible = false;
+            RightSwipePossible = true;
+        }
+
+        public void SetBothWaysSwipe()
+        {
+            LeftSwipePossible = true;
+            RightSwipePossible = true;
         }
 
         private void SwipeWhenHaveButtons(MotionEvent e, float movement)
@@ -108,7 +133,6 @@ namespace Torman.Swipeable
                 case MotionEventActions.Move:
                     {
                         SwipeInBounds(movement);
-                        parentView.Movement(movement);
                     }
                     break;
                 case MotionEventActions.Up:
@@ -184,8 +208,8 @@ namespace Torman.Swipeable
 
             if (Math.Abs(futurePosition) <= offset)
             {
-                if (!LeftSwipe && futurePosition < 0 ||
-                    !RightSwipe && futurePosition > 0)
+                if (!LeftSwipePossible && futurePosition < 0 ||
+                    !RightSwipePossible && futurePosition > 0)
                 {
                     futurePosition = 0;
                 }
@@ -198,14 +222,14 @@ namespace Torman.Swipeable
         {
             if (movement < 0)
             {
-                if (LeftSwipe || ViewPosition > 0)
+                if (LeftSwipePossible || ViewPosition > 0)
                 {
                     return true;
                 }
             }
             else if (movement > 0)
             {
-                if (RightSwipe || ViewPosition < 0)
+                if (RightSwipePossible || ViewPosition < 0)
                 {
                     return true;
                 }
@@ -226,6 +250,11 @@ namespace Torman.Swipeable
             }
 
             return 0;
+        }
+
+        private void OnMovementChanged(float movement)
+        {
+            MovementChanged?.Invoke(this, movement);
         }
     }
 }

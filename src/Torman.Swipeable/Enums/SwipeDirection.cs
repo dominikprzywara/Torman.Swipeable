@@ -1,4 +1,4 @@
-﻿namespace Torman.Swipeable
+﻿namespace Torman.Swipeable.Enums
 {
     public enum SwipeDirection
     {

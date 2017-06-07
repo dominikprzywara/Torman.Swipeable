@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwipeDemo", "SwipeDemo\SwipeDemo.csproj", "{595261F0-DD4B-4E5E-8B66-CB83174689BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Torman.Swipeable", "..\src\Torman.Swipeable\Torman.Swipeable.csproj", "{70D75E77-7478-4D7A-BCED-5985466ECAC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +19,10 @@ Global
 		{595261F0-DD4B-4E5E-8B66-CB83174689BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{595261F0-DD4B-4E5E-8B66-CB83174689BB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{595261F0-DD4B-4E5E-8B66-CB83174689BB}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{70D75E77-7478-4D7A-BCED-5985466ECAC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70D75E77-7478-4D7A-BCED-5985466ECAC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70D75E77-7478-4D7A-BCED-5985466ECAC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70D75E77-7478-4D7A-BCED-5985466ECAC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

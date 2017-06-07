@@ -10,6 +10,7 @@ namespace SwipeDemo
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+            RequestWindowFeature(Android.Views.WindowFeatures.NoTitle);
             SetContentView(Resource.Layout.MainLayout);
             var listView = FindViewById<SwipeableListView>(Resource.Id.listView);
             listView.Adapter = new CustomAdapter(this);

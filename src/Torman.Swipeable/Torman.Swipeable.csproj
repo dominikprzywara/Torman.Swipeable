@@ -44,12 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomGestureDetector.cs" />
+    <Compile Include="Builders\ButtonBuilder.cs" />
+    <Compile Include="Container\ButtonsContainer.cs" />
+    <Compile Include="Enums\ButtonSize.cs" />
+    <Compile Include="Gesture\CustomGestureDetector.cs" />
+    <Compile Include="Animations\JumpyAnimation.cs" />
+    <Compile Include="Helpers\ButtonSizeHelper.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SwipeableListView.cs" />
-    <Compile Include="SwipeDirection.cs" />
-    <Compile Include="SwipeLayout.cs" />
+    <Compile Include="CustomControls\SwipeableListView.cs" />
+    <Compile Include="Enums\SwipeDirection.cs" />
+    <Compile Include="Animations\SwipeAnimation.cs" />
+    <Compile Include="CustomControls\SwipeLayout.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\NoMarginButton.axml">
@@ -71,6 +77,10 @@
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

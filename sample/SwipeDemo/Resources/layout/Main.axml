@@ -3,9 +3,11 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#555505">
-  <TextView
-    android:layout_width="match_parent"
-    android:layout_height="72dp"
-    android:id="@+id/textView"/>
+    android:background="#2196F3"
+    android:layout_margin="24dp">
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="48dp"
+      android:layout_margin="24dp"
+      android:id="@+id/textView"/>
 </LinearLayout>
