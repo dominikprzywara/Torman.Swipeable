@@ -17,12 +17,12 @@ You can find sample app in sample/ directory.
 ## Configuration
 You can use swipeable view in your custom adapter.
 
-#Set top view
+## Set top view
 ```
 var topView = swipeableView.SetTopView(Resource.Layout.Main);
 ```
 
-#Configure swipe
+## Configure swipe
 It's fluent!
 ```
 swipeableView
