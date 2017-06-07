@@ -14,4 +14,4 @@ You can find sample app in sample/ directory.
 * Swipe manager (f.e. only one row in ListView can show buttons below),
 * Different animations.
 
-[swipeAnimation]: https://github.com/domino46/Torman.Swipeable/blob/master/SwipeDemo.gif "Swipe demo animation"
+[swipeAnimation]: https://github.com/domino46/Torman.Swipeable/blob/master/img/NewSwipeDemo.gif "Swipe demo animation"
