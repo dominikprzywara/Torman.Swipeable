@@ -4,6 +4,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Java.Lang;
+using System;
 using Torman.Swipeable.Animations;
 using Torman.Swipeable.Builders;
 using Torman.Swipeable.Container;
@@ -14,6 +15,8 @@ namespace Torman.Swipeable
 {
     public class SwipeLayout : FrameLayout
     {
+        public event EventHandler Moved;
+
         private ButtonsContainer leftSwipeButtonsContainer;
 
         private ButtonsContainer rightSwipeButtonsContainer;
@@ -21,6 +24,8 @@ namespace Torman.Swipeable
         private CustomGestureDetector gestureDetector;
 
         private View topView;
+
+        private EventHandler topViewClick;
 
         public SwipeLayout(Context context) : base(context)
         {
@@ -52,6 +57,25 @@ namespace Torman.Swipeable
 
         public SwipeAnimation SwipePossibilityAnimation { get; set; }
 
+        public EventHandler TopViewClick
+        {
+            get => topViewClick;
+            set
+            {
+                if (topViewClick != null)
+                {
+                    TopView.Click -= topViewClick;
+                }
+                topViewClick = value;
+                TopView.Click += topViewClick;
+            }
+        }
+
+        public void Close()
+        {
+            gestureDetector.Close();
+        }
+
         public View SetTopView(int resourceId, bool removeButtons = true)
         {
             var view = LayoutInflater.FromContext(Context).Inflate(resourceId, null);
@@ -67,7 +91,7 @@ namespace Torman.Swipeable
             topView = view;
             AddView(TopView);
 
-            gestureDetector = new CustomGestureDetector(this, SwipePossibilityAnimation.OffsetInDp);
+            gestureDetector = new CustomGestureDetector(this, SwipePossibilityAnimation.OffsetInDp, Context);
             gestureDetector.MovementChanged += GestureDetector_MovementChanged;
             TopView.SetOnTouchListener(gestureDetector);
 
@@ -166,6 +190,12 @@ namespace Torman.Swipeable
             return this;
         }
 
+        public SwipeLayout DisableSwipe()
+        {
+            gestureDetector.DisableSwipe();
+            return this;
+        }
+
         private void AddButton(
             View button,
             SwipeDirection direction)
@@ -218,6 +248,8 @@ namespace Torman.Swipeable
         private void GestureDetector_MovementChanged(object sender, float movement)
         {
             var futurePosition = TopView.TranslationX + movement;
+
+            Moved?.Invoke(sender, new EventArgs());
 
             if (futurePosition < 0)
             {

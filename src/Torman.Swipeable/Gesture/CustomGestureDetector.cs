@@ -1,4 +1,5 @@
 ﻿using Android.Animation;
+using Android.Content;
 using Android.Views;
 using System;
 
@@ -16,6 +17,8 @@ namespace Torman.Swipeable.Gesture
 
         private readonly SwipeLayout parentView;
 
+        private readonly Context context;
+
         private float lastX;
 
         private float initX;
@@ -26,12 +29,13 @@ namespace Torman.Swipeable.Gesture
 
         private DateTime pressStartTime;
 
-        public CustomGestureDetector(SwipeLayout swipeView, float offset)
+        public CustomGestureDetector(SwipeLayout swipeView, float offset, Context context)
         {
             parentView = swipeView;
             LeftSwipePossible = true;
             RightSwipePossible = true;
             Offset = offset;
+            this.context = context;
         }
 
         public bool LeftSwipePossible { get; private set; }
@@ -74,14 +78,15 @@ namespace Torman.Swipeable.Gesture
 
                     lastX = x;
                     break;
+                //case MotionEventActions.Cancel:
                 case MotionEventActions.Up:
                     var duration = DateTime.UtcNow - pressStartTime;
-                    if (duration.TotalMilliseconds < MaxClickDuration && distance < MaxClickDistance)
+                    if (duration.TotalMilliseconds < MaxClickDuration && distance < MaxClickDistance * context.Resources.DisplayMetrics.Density)
                     {
                         clickPerformed = true;
                         if (ViewPosition != 0)
                         {
-                            TranslateTo(0);
+                            Close();
                         }
                         else
                         {
@@ -126,6 +131,17 @@ namespace Torman.Swipeable.Gesture
             RightSwipePossible = true;
         }
 
+        public void DisableSwipe()
+        {
+            LeftSwipePossible = false;
+            RightSwipePossible = false;
+        }
+
+        public void Close()
+        {
+            TranslateTo(0);
+        }
+
         private void SwipeWhenHaveButtons(MotionEvent e, float movement)
         {
             switch (e.Action)
@@ -146,13 +162,13 @@ namespace Torman.Swipeable.Gesture
 
                     if (Math.Abs(ViewPosition) < Offset && buttonsWidth > Offset)
                     {
-                        TranslateTo(0);
+                        Close();
                     }
                     else
                     {
                         if (initX != 0)
                         {
-                            TranslateTo(0);
+                            Close();
                         }
                         else
                         {
@@ -183,7 +199,7 @@ namespace Torman.Swipeable.Gesture
                 case MotionEventActions.Cancel:
                     if (ViewPosition != 0)
                     {
-                        TranslateTo(0);
+                        Close();
                     }
                     break;
             }

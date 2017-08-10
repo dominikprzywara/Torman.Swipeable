@@ -24,7 +24,7 @@
         android:layout_below="@+id/centerHolder"
         android:layout_gravity="center_horizontal"
         android:id="@+id/ButtonText"
-        android:textSize="12dp"
+        android:textSize="13sp"
         android:gravity="center" />  
     </LinearLayout>
   </LinearLayout>
