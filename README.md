@@ -36,4 +36,4 @@ swipeableView
         SwipeDirection.Left);
 ```
 
-[swipeAnimation]: https://github.com/domino46/Torman.Swipeable/blob/master/img/NewSwipeDemo.gif "Swipe demo animation"
+[swipeAnimation]: https://github.com/dominikprzywara/Torman.Swipeable/blob/master/img/NewSwipeDemo.gif "Swipe demo animation"
